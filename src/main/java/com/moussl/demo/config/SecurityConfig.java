@@ -35,6 +35,7 @@ public class SecurityConfig {
                         .requestMatchers("/save/**", "/delete/**").hasRole("ADMIN")
                         .anyRequest().authenticated()
                 )
+                .exceptionHandling(et->et.accessDeniedPage("/notAuthorized"))
                 .build();
     }
 }
