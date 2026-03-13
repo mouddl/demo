@@ -16,7 +16,8 @@
 
 <div class="p-3" layout:fragment="content1">
 
-    <form method="post" th:action="@{/saveProduct}">
+
+    <form method="post" th:action="@{/admin/saveProduct}">
 
         <div class="mb-3">
             <label class="form-label">product name</label>
@@ -26,20 +27,21 @@
 
         <div class="mb-3">
             <label class="form-label">product price</label>
-            <input class="form-control" type="text" name="name" required th:value="${product.price}">
+            <input class="form-control" type="text" name="price" required th:value="${product.price}">
             <span class="text-danger" th:errors="${product.price}"></span>
         </div>
 
         <div class="mb-3">
             <label class="form-label">product quantity</label>
-            <input class="form-control" type="text" name="name" required th:value="${product.price}">
-            <span class="text-danger" th:errors="${product.price}"></span>
+            <input class="form-control" type="text" name="quantity" required th:value="${product.quantity}">
+            <span class="text-danger" th:errors="${product.quantity}"></span>
         </div>
 
-<button type="submit" class="btn btn-primary">Save</button>
+<button type="submit" class="btn btn-primary"  onclick="return confirm('are you sure');">Save</button>
 
 
     </form>
+
 
 </div>
 </body>

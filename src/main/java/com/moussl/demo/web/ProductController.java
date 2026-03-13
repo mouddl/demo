@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -18,7 +19,7 @@ public class ProductController {
     @Autowired
     private ProductRepository productRepository;
 
-    @GetMapping("index")
+    @GetMapping("/user/index")
     public String index(Model model) {
         List<Product> products = productRepository.findAll();
         model.addAttribute("productslist", products);
@@ -27,7 +28,7 @@ public class ProductController {
 
     @GetMapping("/")
     public String home() {
-        return "redirect:/index";
+        return "redirect:/user/index";
     }
 
     @GetMapping("/delete")
@@ -36,18 +37,19 @@ public class ProductController {
         return "redirect:/index";
     }
 
-    @GetMapping("/newProduct")
+    @GetMapping("/admin/newProduct")
     public String newProduct(Model model) {
         model.addAttribute("product", new Product());
         return "new-product";
     }
 
-    @PostMapping("/saveProduct")
-    public String saveProduct(@Valid Product product, BindingResult bindingResult,Model model) {
+    @PostMapping("/admin/saveProduct")
+    public String saveProduct(@Valid @ModelAttribute("product") Product product, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
-            return "redirect:/newProduct";
+            return "new-product";
         }
         productRepository.save(product);
-        return "redirect:/index ";
+        return "redirect:/admin/newProduct";
     }
+
 }
