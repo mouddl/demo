@@ -2,6 +2,7 @@ package com.moussl.demo.web;
 
 import com.moussl.demo.entities.Product;
 import com.moussl.demo.repository.ProductRepository;
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -55,4 +56,13 @@ public class ProductController {
     public String notAuthorized(Model model) {
         return "/notAuthorized";
 }
+    @GetMapping("/login")
+    public String login(){
+        return "login";
+    }
+    @GetMapping("/logout")
+    public String logout(HttpSession session){
+        session.invalidate();
+        return "login";
+    }
 }

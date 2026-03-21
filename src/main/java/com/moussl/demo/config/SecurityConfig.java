@@ -29,10 +29,11 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
-                .formLogin(Customizer.withDefaults())
+                .formLogin(fl->fl.loginPage("/login").permitAll())
+                .csrf(Customizer.withDefaults())
                 .authorizeHttpRequests(ar -> ar
                         .requestMatchers("/public/**").permitAll()
-                        .requestMatchers("/save/**", "/delete/**").hasRole("ADMIN")
+                        .requestMatchers("/save/**", "/delete/**","/webjars/**").hasRole("ADMIN")
                         .anyRequest().authenticated()
                 )
                 .exceptionHandling(et->et.accessDeniedPage("/notAuthorized"))
