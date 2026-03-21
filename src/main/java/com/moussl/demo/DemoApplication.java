@@ -5,12 +5,9 @@ import com.moussl.demo.repository.ProductRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.security.autoconfigure.SecurityAutoConfiguration;
-import org.springframework.boot.security.autoconfigure.web.servlet.SecurityFilterAutoConfiguration;
-import org.springframework.boot.security.autoconfigure.web.servlet.ServletWebSecurityAutoConfiguration;
 import org.springframework.context.annotation.Bean;
 
-@SpringBootApplication(exclude={ServletWebSecurityAutoConfiguration.class, SecurityFilterAutoConfiguration.class})
+@SpringBootApplication
 public class DemoApplication {
 
     public static void main(String[] args) {
